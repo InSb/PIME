@@ -1,5 +1,8 @@
 # PIME
 
+[![Build status](https://ci.appveyor.com/api/projects/status/ju8c225nt9qgxeee?svg=true)](https://ci.appveyor.com/project/EasyIME/PIME)
+[![GitHub release](https://img.shields.io/github/release/EasyIME/PIME.svg)](https://github.com/EasyIME/PIME/releases)
+
 Implement input methods easily for Windows via Text Services Framework:
 *   LibIME contains a library which aims to be a simple wrapper for Windows Text Service Framework (TSF).
 *   PIMETextService contains an backbone implementation of Windows text service for using libIME.
@@ -11,7 +14,7 @@ All parts are licensed under GNU LGPL v2.1 license.
 
 ## Tool Requirements
 *   [CMake](http://www.cmake.org/) >= 2.8.11
-*   [Visual Studio Express 2012](http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products)
+*   [Visual Studio 2015](https://www.visualstudio.com/)
 *   [git](http://windows.github.com/)
 
 ## How to Build
@@ -19,15 +22,12 @@ All parts are licensed under GNU LGPL v2.1 license.
 
         git clone https://github.com/EasyIME/PIME.git
         cd PIME
-        git submodule init
-        git submodule update
+        git submodule update --init
 
 *   Use one of the following CMake commands to generate Visual Studio project
 
-        cmake -G "Visual Studio 11" -T "v110_xp" <path to PIME source folder>
-        cmake -G "Visual Studio 11 Win64" -T "v110_xp" <path to PIME source folder>
-
-*   NOTICE: The cmake command line argument -T "v110_xp" is required. Otherwise the compiled program won't run on Windows xp. (requires cmake 2.8.11 and VS express 2012 update)
+        cmake -G "Visual Studio 14 2015" <path to PIME source folder>
+        cmake -G "Visual Studio 14 2015 Win64" <path to PIME source folder>
 
 *   Open generated project with Visual Studio and build it
 
@@ -52,8 +52,9 @@ All parts are licensed under GNU LGPL v2.1 license.
 # Install
 *   Copy `PIMETextService.dll` to C:\Program Files (X86)\PIME\x86\.
 *   Copy `PIMETextService.dll` to C:\Program Files (X86)\PIME\x64\.
-*   Copy the folder `server` to `C:\Program Files (X86)\PIME\`
-*   Use `regsvr32` to register `ChewingService.dll`. 64-bit system need to register both 32-bit and 64-bit `PIMETextService.dll`
+*   Copy the folder `python` to `C:\Program Files (X86)\PIME\`
+*   Copy the folder `node` to `C:\Program Files (X86)\PIME\`
+*   Use `regsvr32` to register `PIMETextService.dll`. 64-bit system need to register both 32-bit and 64-bit `PIMETextService.dll`
 
         regsvr32 "C:\Program Files (X86)\PIME\x86\PIMETextService.dll" (run as administrator)
         regsvr32 "C:\Program Files (X86)\PIME\x64\PIMETextService.dll" (run as administrator)
@@ -62,11 +63,11 @@ All parts are licensed under GNU LGPL v2.1 license.
 *   In Windows 8, if you put the dlls in places other than C:\Windows or C:\Program Files, they will not be accessible in metro apps.
 
 # Uninstall
-*   Remove `%WINDIR%/chewing`
-*   Use `regsvr32` to unregister `ChewingTextService.dll`. 64-bit system need to register both 32-bit and 64-bit `ChewingTextService.dll`
+*   Use `regsvr32` to unregister `PIMETextService.dll`. 64-bit system need to register both 32-bit and 64-bit `PIMETextService.dll`
 
         regsvr32 /u "C:\Program Files (X86)\PIME\x86\PIMETextService.dll" (run as administrator)
         regsvr32 /u "C:\Program Files (X86)\PIME\x64\PIMETextService.dll" (run as administrator)
+*   Remove `C:\Program Files (X86)\PIME`
 
 *   NOTICE: the `regsvr32` command needs to be run as Administrator. Otherwise you'll get access denied error.
 
